@@ -1,0 +1,6 @@
+.author-card{
+    border: 1px solid black;
+}
+.content-card{
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}

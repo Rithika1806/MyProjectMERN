@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Gluten:wght@100..900&family=Gupter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Roboto+Slab:wght@100..900&family=Rock+Salt&display=swap');
+
+.header{
+    background-color: rgb(88,19,18);
+    padding: 10px 15px;
+    color: white;
+    flex-wrap: wrap;
+}
+.header-link{
+    list-style-type: none;
+    width: 230px;
+    flex-wrap: wrap;
+    height: 100%; /* Takes full height of the nav */
+}
+.header-logo img{
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+.header-logo h1{
+    font-family: "Gluten", serif;
+    font-weight: 200;
+}
+.afterSignin{
+    width: 210px;
+    justify-content:end;
+}
+.profileLogo{
+    border: 3px solid #F6DED8;
+}
+.signoutButton{
+    background-color: #F6DED8;
+}
+.threebtn:focus-within{
+    border:1px solid #F6DED8;
+    padding: 3px;
+}
+.parent{
+    position: relative;
+}
+.child{
+    position: absolute;
+    top: -5px;  
+    right: -5px;
+    background-color: #64B6AC;
+    color: black;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
