@@ -6,9 +6,8 @@ import { useLocation } from 'react-router-dom';
 
 export default function AllUsers() {
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { currentUser } = useContext(userAuthorContextObj);
+    const { currentUser ,loading, setLoading} = useContext(userAuthorContextObj);
     const { state } = useLocation();
 
     useEffect(() => {
@@ -26,55 +25,33 @@ export default function AllUsers() {
         }
         getUsers();
     }, []);
-
-    async function deleteUser(email) { 
-        try {
-            console.log("Deleting user with email:", email); // Debugging line
-            
-            const res = await axios.put(`http://localhost:3000/user-api/${email}`, state); // Empty body required for PUT
-            
-            if (res.data.message === "User Deleted") {
-                setUsers(users.filter(user => user.email !== email)); // Update UI after deletion
-            }
-        } catch (err) {
-            console.error("Failed to delete user: ", err.response ? err.response.data : err);
-        }
-    }
     
     return (
         <div className='container'>
-            <h2>All Users</h2>
+            <h2 className='text-center mt-5 mb-4'>List of Article Readers</h2>
             
-            {loading && <p>Loading...</p>}
+            {loading && <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
+                <span className="spinner-border spinner-border-md" style={{ color: '#64B6AC' }}></span>
+            </div>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
             
             {!loading && users.length === 0 && <p>No users are currently active.</p>}
 
             {!loading && users.length > 0 && (
-                <table className='table-bordered' style={{ width: "100%", textAlign: "left" }}>
-                    <thead>
-                        <tr>
+                <table className='table-bordered' style={{ width: "100%",textAlign: "center"}}>
+                    <thead style={{backgroundColor:' #F6DED8'}}>
+                        <tr className='fs-5'>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{backgroundColor:' white'}}>
                         {users.map((user) => (
-                            <tr key={user._id}>
-                                <td>{user._id}</td>
-                                <td>{user.firstName} {user.lastName}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    <button 
-                                        className='btn fs-4 d-flex align-items-center' 
-                                        style={{ backgroundColor: '#64B6AC', color: 'white' }} 
-                                        onClick={() => deleteUser(user.email)}
-                                    >
-                                        <MdDelete />
-                                    </button>
-                                </td>
+                            <tr key={user._id}  className='fs-5 '>
+                                <td  className='py-2'>{user._id}</td>
+                                <td  className='py-2'>{user.firstName} {user.lastName}</td>
+                                <td  className='py-2'>{user.email}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -83,4 +60,5 @@ export default function AllUsers() {
         </div>
     );
 }
+
 

@@ -90,7 +90,7 @@ export default function ArticleById(){
         }
         setLoading(false)
     }
-//use the reset method from react-form-hook we should name the property as the name we registered 
+        //use the reset method from react-form-hook we should name the property as the name we registered 
         //NOTE : If you use " " instead of "" after clicking on Cancel the input field will not show the placeholder
        
     async function clearComment(){
@@ -134,7 +134,7 @@ export default function ArticleById(){
                         <button className='btn me-2 ms-2 fs-4 d-flex align-items-center' style={{backgroundColor:'#64B6AC',color:'white'}} onClick={enableEdit}><FaEdit /></button>
                         {/* if article active-delete else restore */}
                         {
-                            state.isArticleActive===true ?(
+                            state?.isArticleActive===true ?(
                                 <button className='btn fs-4 d-flex align-items-center' style={{backgroundColor:'#64B6AC',color:'white'}} onClick={deleteArticle}><MdDelete /></button>
                             ):(
                                 <button className='btn fs-4 d-flex align-items-center' style={{backgroundColor:'#64B6AC',color:'white'}} onClick={restoreArticle}><MdOutlineRestore /></button>
@@ -171,7 +171,6 @@ export default function ArticleById(){
                 }
              </div>
              
-             {/* comment form */}
              {
                 currentUser.role === "user" && (
                 <form className="w-100 mt-2 " onSubmit={handleSubmit(addComment)}>

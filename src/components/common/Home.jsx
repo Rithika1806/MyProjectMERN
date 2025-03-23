@@ -12,7 +12,7 @@ import { TiArrowRightOutline } from "react-icons/ti";
 export default function Home(){
     const navigate=useNavigate()
     const {state}=useLocation()
-    const {currentUser,setCurrentUser,setNotification}=useContext(userAuthorContextObj)
+    const {currentUser,setCurrentUser,setNotification,loading,setLoading}=useContext(userAuthorContextObj)
     //this user property contains user details hence we need to use useEffect hook for this
     const {isSignedIn,user,isLoaded}=useUser()
     console.log('state ',state)
@@ -20,7 +20,6 @@ export default function Home(){
     //to display error
     const [error,setError]=useState('')//we took error as string hence for checking we can check length
     //loading
-    const [loading,setLoading]=useState(true)
 
     useEffect(() => {
       const storedUser = localStorage.getItem("currentuser");
@@ -125,13 +124,16 @@ export default function Home(){
       }
   console.log('currentuser',currentUser)
     return(
+      <>
+      {
+        loading?(
+          <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
+              <span className="spinner-border spinner-border-md" style={{ color: '#64B6AC' }}></span>
+          </div>
+        ):(
         <div className='container-home'>
             {
-              loading?(
-                <div className="d-flex justify-content-center align-items-center" style={{ height: "50vh" }}>
-                    <span className="spinner-border spinner-border-md" style={{ color: '#64B6AC' }}></span>
-                </div>
-              ):(isSignedIn===false && <div className='text-center container' style={{marginTop:'100px'}}>
+              isSignedIn===false && <div className='text-center container' style={{marginTop:'100px'}}>
                 <div className='d-flex'>
                   <img className='home-img ' src='/public/tech.jpg' />
                   <div className='d-flex flex-column justify-content-center align-items-center' style={{paddingLeft:'100px'}}>
@@ -177,17 +179,17 @@ export default function Home(){
                   </div>
                   <img className='home-img' src='/public/lastt.jpg'height='500px' />
                 </div>
-              </div>)
-            }
+              </div>
+}
                 
                 {
           isSignedIn === true && (
               <div>
-                {loading ? (
+                {/* {loading ? (
                   <div className="mt-5 d-flex justify-content-center align-items-center vw-100 vh-50">
                     <span className="mt-5 spinner-border spinner-border-md" style={{ color: '#64B6AC' }}></span>
                   </div>
-                ) : (
+                ) : ( */}
                   <>
                     <div className="card w-50 mx-auto afterSignInCard">
                         <div className="d-flex justify-content-center align-items-center">
@@ -237,12 +239,19 @@ export default function Home(){
                         </div>
                     </div>
                   </>
-                )}
+                {/* )} */}
               </div>
             
           )
         }
     </div>
     )
+  }
+      </>
+
+    )
 }
+
+
+
 

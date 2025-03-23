@@ -9,7 +9,7 @@ export default function Header(){
 
     //we donot have signout property in clerk we have useclerk which has property
     const {signOut}=useClerk()
-    const {currentUser,setCurrentUser,notification,setNotification,noOfNotification,setNoOfNotification}=useContext(userAuthorContextObj)
+    const {currentUser,setCurrentUser,notify,markNotificationsAsRead }=useContext(userAuthorContextObj)
 
     //react-router-dom provides useNavigate hook
     const navigate=useNavigate()
@@ -20,9 +20,17 @@ export default function Header(){
     //signOut is an asyncronous operation so modern way of handling is async & await
     async function handleSignOut(){
         await signOut()
-        setCurrentUser(null)
         navigate('/')
     }
+
+    // function handleClick() {
+    //     if (unreadCount > 0) {
+    //         markNotificationsAsRead();  // Mark all as read when clicked
+    //     }
+    //     setTimeout(() => {
+    //         navigate(`/admin-profile/${currentUser.email}/notifications`);
+    //     }, 300);  // Small delay to ensure state update
+    // }
 
     return(
 //NOTE :Yes!  Always apply align-items-center to the parent if you want to vertically align its child elements inside a flexbox container.
@@ -57,19 +65,12 @@ export default function Header(){
                                 <img src={user.imageUrl} width='40px' className="rounded-circle profileLogo"/>
                             </div>
                             {
-                                currentUser.role && (
-                                    noOfNotification === 0 ? (
-                                        <button className="btn" style={{ color: '#F6DED8' }}>
-                                            <MdNotificationsActive size={25} />
+                                currentUser.role==='admin' && (
+                                    <div className="position-relative d-inline-block">
+                                        <button className="btn" style={{ color: "#F6DED8" }}>
+                                            <MdNotificationsActive size={27} />
                                         </button>
-                                    ) : (
-                                        <div className="position-relative d-inline-block">
-                                            <Link className="parent" style={{ color: '#F6DED8' }}>
-                                                <MdNotificationsActive size={27} />
-                                            </Link>
-                                            {noOfNotification > 0 && <span className="child">{noOfNotification}</span>}
-                                        </div>
-                                    )
+                                    </div>
                             )}
                         </div>
                     }

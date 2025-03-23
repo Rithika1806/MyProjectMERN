@@ -12,6 +12,7 @@ export default function UserAuthorContexts({children}){
         profileImageUrl:'',
         role:'',
     })
+    const [loading,setLoading]=useState(true)
 
     //when page reloaded it is not requesting backened
     //first checks if previous user present in local storage if available takes from local storage
@@ -24,7 +25,7 @@ export default function UserAuthorContexts({children}){
 
     return (
         <div>
-            <userAuthorContextObj.Provider value={{currentUser,setCurrentUser}}>{children}</userAuthorContextObj.Provider>
+            <userAuthorContextObj.Provider value={{currentUser,setCurrentUser,loading,setLoading}}>{children}</userAuthorContextObj.Provider>
         </div>
     )
 }

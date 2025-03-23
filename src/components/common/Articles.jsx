@@ -1,4 +1,5 @@
 import axios from "axios"
+import './Articles.css'
 import { useState,useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { userAuthorContextObj } from "../../contexts/UserAuthorContexts"
@@ -113,17 +114,18 @@ export default function Articles(){
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-3">
                                 {articles.map((articleObj) => (
                                     <div className="col mt-3" key={articleObj.articleId}>
-                                        <div className="card h-100">
-                                            <div className="card-body">
-                                                <div className="text-end">
+                                        <div className="article-card card h-100">
+                                            <div className="card-header text-end">
+                                                    <small className=" me-1">{articleObj.authorData.nameOfAuthor}</small>
                                                     <img
                                                         src={articleObj.authorData.profileImageUrl}
                                                         width="40px"
-                                                        className="rounded-circle me-1"
+                                                        className="rounded-circle"
                                                         alt="Author"
                                                     />
-                                                    <small>{articleObj.authorData.nameOfAuthor}</small>
-                                                </div>
+                                            </div>
+                                            <div className="card-body">
+                                                
                                                 <h5 className="card-title">{articleObj.title}</h5>
                                                 <p className="card-text">{articleObj.content.substring(0, 80) + '....'}</p>
                                                 <button
@@ -147,3 +149,5 @@ export default function Articles(){
         </div>
     )
 }
+
+
